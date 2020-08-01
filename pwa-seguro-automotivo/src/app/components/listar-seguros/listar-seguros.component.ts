@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Seguro } from 'src/app/models/seguro';
+import { SeguroService } from '../../services/seguro.service';
 
 @Component({
   selector: 'app-listar-seguros',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarSegurosComponent implements OnInit {
 
-  constructor() { }
+  public seguros$: Observable<Seguro[]>;
+
+  constructor(
+    private seguroService: SeguroService
+  ) { }
 
   ngOnInit() {
+    this.seguros$ = this.seguroService.listar();
   }
 
 }
